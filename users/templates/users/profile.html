@@ -1,0 +1,16 @@
+{% if user.id == request.user.id %}
+
+<form method="post">{% csrf_token %}
+    <p> {{ form.image }}</p>
+    <p>{{ form.username }}</p>
+    <p>{{ form.email }}</p>
+    <input type="submit" value="Save">
+</form>
+
+
+<a href="{% url 'index' %}">На главную</a>
+
+{% else %}
+<h1>Отказано в доступе</h1>
+
+{% endif %}
