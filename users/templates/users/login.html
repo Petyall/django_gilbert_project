@@ -1,7 +1,9 @@
+<p>
+    <a href="{% url 'content:index' %}">На главную</a>
+    <a href="{% url 'users:registration' %}">Зарегистрироваться</a>
+</p>
+
 <form method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Save">
 </form>
-
-
-<a href="{% url 'users:registration' %}">Зарегистрироваться</a>

@@ -1,0 +1,29 @@
+{% if user.is_verified_email %}
+    {% if is_user_have_post %}
+        <center>
+            <p>
+                <h1>Мы приняли ваш рецепт, спасибо, что помогаете развивать наш сервис :) </h1>
+            </p>
+            <p>
+                <h1>Пожалуйста, дождитесь проверки, после которой вы сможете предложить рецепт снова!</h1>
+            </p>
+        </center>
+    {% else %}
+        <center>
+            <form action="{% url 'users:user_receipt' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ form.receipt_name }}</p>
+            <p>{{ form.cooking_time }}</p>
+            <p>{{ form.steps }}</p>
+            <p>{{ form.image }}</p>
+            <p>{{ form.link }}</p>
+            <input type="submit" value="Save">
+        </form>
+        </center>
+    {% endif %}
+{% else %}
+    <center>
+        <h1>Чтобы предложить рецепт, необходимо сначала подтвердить адресс вашей электронной почты, которую вы указали при регистрации!</h1>
+        <a href="#">Подтвердить</a>
+    </center>
+{% endif %}

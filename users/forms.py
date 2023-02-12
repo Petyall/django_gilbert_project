@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
-from users.models import User
+from users.models import User, UsersReceipts
 
 
 class UserLoginForm(AuthenticationForm):
@@ -51,7 +51,26 @@ class UserProfileForm(UserChangeForm):
 
 
     class Meta:
-        # Модель с которой будет работать форма
         model = User
-        # Поля, которые будут отображаться в форме
         fields = ('image', 'username', 'email')
+
+
+class UserReceiptForm(forms.ModelForm):
+    receipt_name = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': 'Название блюда',
+    }))
+    cooking_time = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': 'Примерное время приготовления',
+    }))
+    link = forms.CharField(widget=forms.TextInput(attrs={
+        'placeholder': 'Ссылка на источник (при наличии)',
+    }), required=False)
+    steps = forms.Textarea()
+    image = forms.ImageField(widget=forms.FileInput(attrs={
+        'placeholder': 'Фотография готового блюда'
+    }))
+
+
+    class Meta:
+        model = UsersReceipts
+        fields = ('receipt_name', 'cooking_time', 'steps', 'image', 'link')

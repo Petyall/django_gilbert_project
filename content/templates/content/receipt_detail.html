@@ -1,0 +1,26 @@
+{% load static %}
+
+<p>
+  <a href="{% url 'content:index' %}">Главная</a>
+</p>
+
+<head>
+    <link href="{% static 'css/receipts.css' %}" rel="stylesheet"/>
+</head>
+
+<center>
+  <h1>{{ object.receipt_name }}</h1>
+  <h2>{{ object.cooking_time }}</h2>
+  <h3>{{ object.description }}</h1>
+  <img src="{{ object.image.url }}" class="card__image" alt="" />
+</center>
+
+<ul>
+    <li>{{ object.first_ingridient }}</li>
+    <li>{{ object.second_ingridient }}</li>
+</ul>
+
+<ul>
+  <li>{{ object.first_step }}</li>
+  <li>{{ object.second_step }}</li>
+</ul>

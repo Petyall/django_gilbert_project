@@ -1,0 +1,38 @@
+<p>
+  <a href="{% url 'content:index' %}">Главная</a>
+</p>
+
+<center>
+    <form action="{% url 'content:search' %}" method="GET">
+        <input type="search" name="q">
+        <button type="submit">Найти</button>
+    </form>
+</center>
+
+<center>
+    {% for category in categories %}
+        <a href="{% url 'content:food' category.id %}" class="list-group-item">{{category.name}}</a>
+    {% endfor %}
+        <a href="{% url 'content:food' 0 %}" class="list-group-item">Все продукты</a>
+</center>
+
+<center>
+    {% for food in object_list %}
+        {% if food.permission %}
+            <p>МОЖНО</p>
+            {{ food.name }}
+        {% endif %}
+    {% empty %}
+        <li>Еды нет.</li>
+    {% endfor %}
+
+    {% for food in object_list %}
+        {% if not food.permission %}
+            <p>НЕЛЬЗЯ</p>
+            {{ food.name }}
+        {% endif %}
+    {% empty %}
+        <li>Еды нет.</li>
+    {% endfor %}
+
+</center>

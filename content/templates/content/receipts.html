@@ -1,0 +1,55 @@
+{% load static %}
+
+<head>
+  <link href="{% static 'css/receipts.css' %}" rel="stylesheet"/>
+</head>
+
+<p>
+  <a href="{% url 'content:index' %}">Главная</a>
+  <a href="{% url 'users:user_receipt' %}">Предложить рецепт</a>
+</p>
+
+<center>
+  <a href="{% url 'content:receipts' 0 %}" class="list-group-item">Все продукты</a>
+  {% for category in categories %}
+    <a href="{% url 'content:receipts' category.id %}" class="list-group-item">{{category.name}}</a>
+  {% endfor %}
+</center>
+
+<ul class="cards">
+  {% for receipt in object_list %} 
+    <li>
+      <a href="{% url 'content:receipt_detail' receipt.id %}" class="card">
+        <img src="{{ receipt.image.url }}" class="card__image" alt="" />
+        <div class="card__overlay">
+          <div class="card__header">
+            <div class="card__header-text">
+              <h3 class="card__title">{{receipt}}</h3>            
+              <span class="card__status">~ {{ receipt.cooking_time}}</span>
+            </div>
+          </div>
+          <p class="card__description">{{receipt.description}}</p>
+        </div>
+      </a>      
+    </li>
+  {% empty %}
+    <h1>Рецептов нет ;(</h1>
+  {% endfor %}
+</ul>
+
+
+<center>
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+            <span class="current">{{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <span class="current">{{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+            <a href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+</center>
