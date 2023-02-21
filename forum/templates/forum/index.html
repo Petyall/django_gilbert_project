@@ -1,0 +1,17 @@
+<center>
+<h1>ПОСЛЕДНИЕ ВОПРОСЫ НА ФОРУМЕ</h1>
+{% for post in object_list %}
+<p><h3><a href="{% url 'forum:post_detail' post.pk %}"><p>{{post.name}}</p></a></p></h3>
+{% empty %}
+<h1>постов нет</h1>
+{% endfor %}
+</center>
+
+<center>
+    <form action="{% url 'forum:search' %}" method="GET">
+        <input type="search" name="q">
+        <button type="submit">Найти</button>
+    </form>
+</center>
+
+<a href="{% url 'content:index' %}">Главная</a>

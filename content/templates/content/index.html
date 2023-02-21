@@ -1,15 +1,17 @@
 <center>
-    <h2>Привет, {{ user.username }}!</h3>
         
     {% if user.is_authenticated %}
+        <h2>Привет, {{ user.username }}!</h3>
         <a href="{% url 'users:logout' %}">Выйти</a>
         <a href="{% url 'users:profile' user.id %}">Личный кабинет</a>
     {% else %}
+        <h2>Здравствуйте!</h3>
         <a href="{% url 'users:login' %}">Авторизоваться</a>
     {% endif %}
 
     <p>
         <a href="{% url 'content:food' 0 %}">Продукты</a>
         <a href="{% url 'content:receipts' 0 %}">Рецепты</a>
+        <a href="{% url 'forum:home' %}">Форум</a>
     </p>
 </center>

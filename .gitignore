@@ -110,6 +110,8 @@ ENV/
 env.bak/
 venv.bak/
 media
+fixtures
+backup_db
 
 # Spyder project settings
 .spyderproject

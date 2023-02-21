@@ -1,0 +1,31 @@
+<center>
+<h1>{{object.name}}</h1>
+<h3>{{object.description}}</h3>
+<p>Автор - {{object.author}} - {{object.date}}</p>
+</center>
+
+<br><br><br><br>
+<center>
+<h2>Комментарии к посту:</h2>
+{% for comment in comments %}
+<p>{{comment.author}} - {{comment.description}} - {{ comment.date }}</p>
+{% empty %}
+<h1>Комментариев нет!</h1>
+{% endfor %}
+</center>
+
+<br><br><br><br>
+<center>
+<form action="{% url 'forum:post_detail' object.pk %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>Оставить комментарий</p>
+    <p>{{ form.description }}</p>
+    <p>{{ form.errors }}</p>
+<input type="submit" value="Save">
+</center>
+
+<br><br><br><br>
+<center>
+<a href="{% url 'forum:home' %}">Вернуться</a>
+<a href="{% url 'content:index' %}">Главная</a>
+</center>
